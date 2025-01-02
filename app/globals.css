@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+
+.carousel-slide {
+  height: 200px; /* Adjust as needed */
+  aspect-ratio: 1 / 1; /* Makes the image square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
