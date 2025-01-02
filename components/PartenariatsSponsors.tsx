@@ -1,73 +1,86 @@
 'use client'
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, ExternalLink, Building, Award, Globe } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight, ExternalLink, Building, Award } from 'lucide-react';
 import Image from 'next/image';
 
-import botoloa from '@/assets/botola-pro.png'
-import ocp from '@/assets/ocp.webp'
-import royal from '@/assets/Royal Air Maroc.png'
-import snrt from '@/assets/SNRT.jpg'
+import botoloa from '@/assets/botola-pro.png';
+import ocp from '@/assets/ocp.webp';
+import royal from '@/assets/Royal Air Maroc.png';
+import snrt from '@/assets/SNRT.jpg';
+
+type Niveau = 'Platine' | 'Or' | 'Argent';
+
+interface Sponsor {
+  id: number;
+  nom: string;
+  categorie: string;
+  logo: string;
+  description: string;
+  niveau: Niveau;
+  depuis: string;
+}
 
 const PartenariatsSponsors = () => {
-const [categorieFiltree, setCategorieFiltree] = useState('tous');
+  const [categorieFiltree, setCategorieFiltree] = useState('tous');
 
-const sponsors = [
+  const sponsors: Sponsor[] = [
     {
-        id: 1,
-        nom: "Botola Pro",
-        categorie: "officiel",
-        logo: botoloa.src,
-        description: "Partenaire officiel de la ligue professionnelle marocaine",
-        niveau: "Platine",
-        depuis: "1915"
+      id: 1,
+      nom: 'Botola Pro',
+      categorie: 'officiel',
+      logo: botoloa.src,
+      description: 'Partenaire officiel de la ligue professionnelle marocaine',
+      niveau: 'Platine',
+      depuis: '1915',
     },
     {
-        id: 2,
-        nom: "OCP Group",
-        categorie: "principal",
-        logo: ocp.src,
-        description: "Sponsor principal maillot",
-        niveau: "Or",
-        depuis: "2020"
+      id: 2,
+      nom: 'OCP Group',
+      categorie: 'principal',
+      logo: ocp.src,
+      description: 'Sponsor principal maillot',
+      niveau: 'Or',
+      depuis: '2020',
     },
     {
-        id: 3,
-        nom: "Royal Air Maroc",
-        categorie: "transport",
-        logo: royal.src,
-        description: "Transporteur officiel du club",
-        niveau: "Or",
-        depuis: "2019"
+      id: 3,
+      nom: 'Royal Air Maroc',
+      categorie: 'transport',
+      logo: royal.src,
+      description: 'Transporteur officiel du club',
+      niveau: 'Or',
+      depuis: '2019',
     },
     {
-        id: 4,
-        nom: "SNRT",
-        categorie: "media",
-        logo: snrt.src,
-        description: "Partenaire média officiel",
-        niveau: "Argent",
-        depuis: "2021"
-    }
-];
+      id: 4,
+      nom: 'SNRT',
+      categorie: 'media',
+      logo: snrt.src,
+      description: 'Partenaire média officiel',
+      niveau: 'Argent',
+      depuis: '2021',
+    },
+  ];
 
-const categories = [
+  const categories = [
     { id: 'tous', nom: 'Tous les partenaires' },
     { id: 'officiel', nom: 'Partenaires Officiels' },
     { id: 'principal', nom: 'Sponsors Principaux' },
     { id: 'transport', nom: 'Transport' },
-    { id: 'media', nom: 'Médias' }
-];
+    { id: 'media', nom: 'Médias' },
+  ];
 
-const niveauxCouleurs = {
-    'Platine': 'bg-gradient-to-r from-gray-200 to-gray-400',
-    'Or': 'bg-gradient-to-r from-yellow-200 to-yellow-400',
-    'Argent': 'bg-gradient-to-r from-gray-300 to-gray-500'
-};
+  const niveauxCouleurs: Record<Niveau, string> = {
+    Platine: 'bg-gradient-to-r from-gray-200 to-gray-400',
+    Or: 'bg-gradient-to-r from-yellow-200 to-yellow-400',
+    Argent: 'bg-gradient-to-r from-gray-300 to-gray-500',
+  };
 
-const sponsorsFiltres = categorieFiltree === 'tous' 
-    ? sponsors 
-    : sponsors.filter(s => s.categorie === categorieFiltree);
+  const sponsorsFiltres =
+    categorieFiltree === 'tous'
+      ? sponsors
+      : sponsors.filter((s) => s.categorie === categorieFiltree);
 
   return (
     <div className="max-w-6xl py-12 mx-auto p-4">
@@ -111,21 +124,23 @@ const sponsorsFiltres = categorieFiltree === 'tous'
                   />
                   <h3 className="text-xl font-bold mb-2">{sponsor.nom}</h3>
                   <p className="text-gray-600 mb-4">{sponsor.description}</p>
-                  
+
                   <div className="flex items-center gap-2 mb-2">
                     <Building className="w-4 h-4 text-gray-500" />
                     <span className="text-sm">Partenaire depuis {sponsor.depuis}</span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2">
                     <Award className="w-4 h-4 text-gray-500" />
-                    <span className={`text-sm px-3 py-1 rounded-full ${niveauxCouleurs[sponsor.niveau]}`}>
+                    <span
+                      className={`text-sm px-3 py-1 rounded-full ${niveauxCouleurs[sponsor.niveau]}`}
+                    >
                       Niveau {sponsor.niveau}
                     </span>
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <button className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors">
                   <span>En savoir plus</span>
@@ -136,9 +151,6 @@ const sponsorsFiltres = categorieFiltree === 'tous'
           </Card>
         ))}
       </div>
-
-      {/* Section Devenir Partenaire */}
-      
 
       {/* Statistiques */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
@@ -166,3 +178,4 @@ const sponsorsFiltres = categorieFiltree === 'tous'
 };
 
 export default PartenariatsSponsors;
+
